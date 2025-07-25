@@ -59,7 +59,7 @@ pipeline {
 
         stage('Push Image to Repository') {
             steps {
-                sh 'docker push Hanamanth866/project:1'
+                sh 'docker pullS Hanamanth866/project:1'
             }
         }
     }
