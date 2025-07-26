@@ -33,7 +33,7 @@ pipeline {
 
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image  --format value table -o trivy-image-report.html hanamanth866/project:1"
+                sh "trivy image --format table -o trivy-image-report.txt hanamanth866/project:1"
             }
         }
 
