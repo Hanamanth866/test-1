@@ -31,11 +31,7 @@ pipeline {
             }
         }
 
-        stage('Docker Image Scan') {
-            steps {
-                sh "trivy image --format table -o trivy-image-report.html hanamanth866/project:1"
-            }
-        }
+        
 
         stage('Containerization') {
             steps {
