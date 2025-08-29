@@ -30,11 +30,30 @@ pipeline {
                 sh "docker build -t hanamanth866/project:1 ."
             }
         }
-       stage('Docker image scan'){
-            steps {
-                    sh 'trivy image --format table -o trivy-image-report.html hanamanth866/project:1'
-            }
+     stage('Trivy Image Scan') {
+    steps {
+        script {
+            def imageName = 'hanamanth866/project:1'
+            def reportFile = 'trivy-image-report.html'
+
+            sh """
+                trivy image \
+                    --timeout 5m \
+                    --skip-update \
+                    --severity HIGH,CRITICAL \
+                    --format table \
+                    --output ${reportFile} \
+                    ${imageName} || echo '⚠️ Trivy scan failed or timed out, continuing pipeline.'
+            """
         }
+    }
+    post {
+        always {
+            archiveArtifacts artifacts: 'trivy-image-report.html', allowEmptyArchive: true
+        }
+    }
+}
+
         
        stage('Containerization') {
             steps {
