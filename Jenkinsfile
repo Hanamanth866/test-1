@@ -30,10 +30,13 @@ pipeline {
                 sh "docker build -t hanamanth866/project:1 ."
             }
         }
-
+       stage('Docker image scan'){
+            steps {
+                    sh 'trivy image --format table -o trivy-image-report.html manojkrishnappa/project:1'
+            }
+        }
         
-
-        stage('Containerization') {
+       stage('Containerization') {
             steps {
                 sh '''
                     docker stop c1 || true
