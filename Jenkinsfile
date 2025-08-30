@@ -43,7 +43,7 @@ pipeline {
                     --severity HIGH,CRITICAL \
                     --format table \
                     --output ${reportFile} \
-                    ${imageName} || echo '⚠️ Trivy scan failed or timed out, continuing pipeline.'
+                  
             """
         }
     }
