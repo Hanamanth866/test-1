@@ -39,11 +39,7 @@ pipeline {
             sh """
                 trivy image \
                     --timeout 5m \
-                    --skip-update \
-                    --severity HIGH,CRITICAL \
-                    --format table \
-                    --output ${reportFile} \
-                  
+                    --format table \  
             """
         }
     }
