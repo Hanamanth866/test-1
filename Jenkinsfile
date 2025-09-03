@@ -30,25 +30,7 @@ pipeline {
                 sh "docker build -t hanamanth866/project:1 ."
             }
         }
-     stage('Trivy Image Scan') {
-    steps {
-        script {
-            def imageName = 'hanamanth866/project:1'
-            def reportFile = 'trivy-image-report.html'
-
-            sh """
-                trivy image \
-                    --timeout 5m \
-                    --format table \  
-            """
-        }
-    }
-    post {
-        always {
-            archiveArtifacts artifacts: 'trivy-image-report.html', allowEmptyArchive: true
-        }
-    }
-}
+     
 
         
        stage('Containerization') {
